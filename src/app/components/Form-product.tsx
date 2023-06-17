@@ -2,9 +2,10 @@
 import { saveProduct, uploadImage } from "@/api/products";
 import { useUser } from "@clerk/nextjs";
 import * as Form from "@radix-ui/react-form";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, useRef } from "react";
 
 export default function FormProduct() {
+  const ref = useRef<HTMLFormElement>(null);
   const { user } = useUser();
   const [productName, setProductName] = useState<string>("");
   const [productPrice, setProductPrice] = useState<number>(0);
@@ -14,6 +15,7 @@ export default function FormProduct() {
     <div className="flex flex-col items-center mt-40 text-black font-semibold">
       <h2 className="text-2xl mb-5">Create a product</h2>
       <Form.Root
+        ref={ref}
         className="flex flex-col gap-4"
         onSubmit={async (e) => {
           e.preventDefault();
@@ -37,14 +39,15 @@ export default function FormProduct() {
             product.id = doc?.id ?? Date.now().toString();
 
             //     setPostsArray([post, ...postsArray]);
-            //     setPostContent("");
+
+            setProductImg(undefined);
+            setProductName("");
+            setProductPrice(0);
+            //this function clear all form elements
+            ref.current?.reset();
           } catch (error) {
             console.error(error);
           }
-
-          //   } catch (error) {
-          //     console.error(error);
-          //   }
         }}
       >
         <Form.Field className="mx-auto" name="name">
