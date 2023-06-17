@@ -1,22 +1,34 @@
 "use client";
 
 import * as Form from "@radix-ui/react-form";
+import { useState } from "react";
 
 export default function FormProduct() {
+  const [productName, setProductName] = useState<string>("");
+  const [productPrice, setProductPrice] = useState<number>(0);
+  const [productImg, setProductImg] = useState<string>("");
+
+  console.log({ productName, productPrice });
+
   return (
     <div className="flex flex-col items-center mt-40 text-black font-semibold">
       <h2 className="text-2xl mb-5">Create a product</h2>
-      <Form.Root className="flex flex-col gap-4">
+      <Form.Root
+        className="flex flex-col gap-4"
+        onSubmit={async (e) => {
+          e.preventDefault();
+        }}
+      >
         <Form.Field className="mx-auto" name="email">
           <div className="flex flex-col gap-1">
             <Form.Label className="">Name</Form.Label>
             <Form.Control asChild>
               <input
                 onChange={(e) => {
-                  const user = e.target.value;
-                  //   setUser(user);
+                  setProductName(e.target.value);
                 }}
-                className="w-60 p-2 rounded-md"
+                value={productName}
+                className="w-60 p-2 rounded-md border border-rose-300"
                 type="email"
                 required
               />
@@ -30,11 +42,11 @@ export default function FormProduct() {
             <Form.Control asChild>
               <input
                 onChange={(e) => {
-                  const password = e.target.value;
-                  //   setPassword(password);
+                  setProductPrice(parseInt(e.target.value));
                 }}
-                className="w-60 p-2 rounded-md"
-                type="email"
+                value={productPrice}
+                className="w-60 p-2 rounded-md border border-rose-300"
+                type="text"
                 required
               />
             </Form.Control>
@@ -47,11 +59,10 @@ export default function FormProduct() {
             <Form.Control asChild>
               <input
                 onChange={(e) => {
-                  const password = e.target.value;
-                  //   setPassword(password);
+                  setProductImg(e.target.value);
                 }}
-                className="w-60 p-2 rounded-md"
-                type="email"
+                className="w-60 p-2 rounded-md border border-rose-300"
+                type="text"
                 required
               />
             </Form.Control>
@@ -62,13 +73,9 @@ export default function FormProduct() {
           <button
             onClick={() => {
               console.log("entra");
-
-              //   if (user === "karen" && password === "123") {
-              //     router.push("/content");
-              //   }
             }}
             type="submit"
-            className="w-60 p-2 mt-3 mx-auto rounded-md bg-lime-500 text-center font-bold text-gray-950"
+            className="w-60 p-2 mt-3 mx-auto rounded-md bg-rose-500 hover:bg-rose-600 hover:text-white  text-center font-bold"
           >
             Post Product
           </button>
