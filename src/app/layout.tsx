@@ -1,10 +1,10 @@
 import "./globals.css";
-import { Newsreader } from "next/font/google";
+import { Poppins } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import Navbar from "./components/Navbar";
 
-const inter = Newsreader({
-  weight: "400",
+const inter = Poppins({
+  weight: "300",
   subsets: ["latin"],
   display: "swap",
 });
