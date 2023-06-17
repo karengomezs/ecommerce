@@ -1,22 +1,23 @@
-// import { db } from "@/app/firebase";
-// import {
-//   collection,
-//   addDoc,
-//   getDocs,
-//   deleteDoc,
-//   doc,
-//   query,
-//   orderBy,
-// } from "firebase/firestore";
+import { db } from "@/app/firebase";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  deleteDoc,
+  doc,
+  query,
+  orderBy,
+  DocumentReference,
+} from "firebase/firestore";
 
-// export async function savePost(post: Omit<Post, "id">) {
-//   try {
-//     const docRef = await addDoc(collection(db, "posts"), post);
-//     return docRef;
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
+export async function saveProduct({ id, ...product }: Product) {
+  try {
+    const docRef = await addDoc(collection(db, "product"), product);
+    return docRef as DocumentReference<Product>;
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 // export async function getPost() {
 //   try {
