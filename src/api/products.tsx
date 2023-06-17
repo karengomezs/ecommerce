@@ -12,7 +12,7 @@ import {
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 export async function uploadImage(file: File) {
-  const fileRef = ref(storage, file.name);
+  const fileRef = ref(storage, Date.now().toString() + "_" + file.name);
 
   const snapShot = await uploadBytes(fileRef, file);
   const urlImg = await getDownloadURL(snapShot.ref);
