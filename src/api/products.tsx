@@ -1,4 +1,4 @@
-import { db } from "@/app/firebase";
+import { db, storage } from "@/app/firebase";
 import {
   collection,
   addDoc,
@@ -9,6 +9,16 @@ import {
   orderBy,
   DocumentReference,
 } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
+export async function uploadImage(file: File) {
+  const fileRef = ref(storage, file.name);
+
+  const snapShot = await uploadBytes(fileRef, file);
+  const urlImg = await getDownloadURL(snapShot.ref);
+
+  return { snapShot, urlImg };
+}
 
 export async function saveProduct({ id, ...product }: Product) {
   try {

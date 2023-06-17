@@ -1,16 +1,14 @@
 "use client";
-import { saveProduct } from "@/api/products";
+import { saveProduct, uploadImage } from "@/api/products";
 import { useUser } from "@clerk/nextjs";
 import * as Form from "@radix-ui/react-form";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 export default function FormProduct() {
   const { user } = useUser();
   const [productName, setProductName] = useState<string>("");
   const [productPrice, setProductPrice] = useState<number>(0);
-  const [productImg, setProductImg] = useState<string>("");
-
-  console.log({ productName, productPrice, productImg });
+  const [productImg, setProductImg] = useState<File>();
 
   return (
     <div className="flex flex-col items-center mt-40 text-black font-semibold">
@@ -20,25 +18,23 @@ export default function FormProduct() {
         onSubmit={async (e) => {
           e.preventDefault();
 
-          console.log("hola");
-
           try {
+            if (!productImg) return;
+
+            const img = await uploadImage(productImg);
+
             let product: Product = {
               id: "",
               name: productName,
               price: productPrice,
-              img: productImg,
+              img: img.urlImg,
               userId: user?.id ?? "",
               userName: user?.fullName ?? "",
               date: new Date(),
             };
 
-            console.log({ product });
-
             const doc = await saveProduct(product);
             product.id = doc?.id ?? Date.now().toString();
-
-            console.log({ doc });
 
             //     setPostsArray([post, ...postsArray]);
             //     setPostContent("");
@@ -90,11 +86,11 @@ export default function FormProduct() {
             <Form.Label className="">Image</Form.Label>
             <Form.Control asChild>
               <input
-                onChange={(e) => {
-                  setProductImg(e.target.value);
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  setProductImg(e.target.files?.[0]);
                 }}
                 className="w-60 p-2 rounded-md border border-rose-300"
-                type="text"
+                type="file"
                 required
               />
             </Form.Control>
