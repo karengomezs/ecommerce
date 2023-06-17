@@ -8,7 +8,7 @@ export default function Navbar() {
         <ul className="flex justify-between items-center">
           <li>
             <Link className="text-lime-500  text-3xl font-bold" href="">
-              TWILLY
+              Karen Gómez
             </Link>
           </li>
           <li>{/* <UserButton afterSignOutUrl="/" /> */}</li>
