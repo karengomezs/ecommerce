@@ -1,9 +1,13 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { Newsreader } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import Navbar from "./components/Navbar";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Newsreader({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata = {
   title: "Create Next App",
@@ -18,7 +22,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`${inter.className} bg-gray-950 h-screen`}>
+        <body className={`${inter.className}  h-screen`}>
           <Navbar />
           {children}
         </body>
