@@ -10,9 +10,11 @@ export default function FormProduct() {
   const [productName, setProductName] = useState<string>("");
   const [productPrice, setProductPrice] = useState<number>(0);
   const [productImg, setProductImg] = useState<File>();
+  const [productPosted, setProductPosted] = useState<boolean>(false);
+  const [buttonDisable, setButtonDisable] = useState<boolean>(false);
 
   return (
-    <div className="flex flex-col items-center mt-40 text-black font-semibold">
+    <div className="flex flex-col items-center mt-28 text-black font-semibold">
       <h2 className="text-2xl mb-5">Create a product</h2>
       <Form.Root
         ref={ref}
@@ -22,6 +24,8 @@ export default function FormProduct() {
 
           try {
             if (!productImg) return;
+
+            setButtonDisable(true);
 
             const img = await uploadImage(productImg);
 
@@ -39,14 +43,17 @@ export default function FormProduct() {
             product.id = doc?.id ?? Date.now().toString();
 
             //     setPostsArray([post, ...postsArray]);
-
             setProductImg(undefined);
             setProductName("");
             setProductPrice(0);
             //this function clear all form elements
             ref.current?.reset();
+
+            setProductPosted(true);
+            setButtonDisable(false);
           } catch (error) {
             console.error(error);
+            setButtonDisable(false);
           }
         }}
       >
@@ -57,6 +64,7 @@ export default function FormProduct() {
               <input
                 onChange={(e) => {
                   setProductName(e.target.value);
+                  setProductPosted(false);
                 }}
                 value={productName}
                 className="w-60 p-2 rounded-md border border-rose-300"
@@ -102,12 +110,15 @@ export default function FormProduct() {
 
         <Form.Submit asChild>
           <button
+            disabled={buttonDisable}
             type="submit"
             className="w-60 p-2 mt-3 mx-auto rounded-md bg-rose-500 hover:bg-rose-600 hover:text-white  text-center font-bold"
           >
-            Post Product
+            {buttonDisable ? <p>Creating product</p> : <p>Post Product</p>}
           </button>
         </Form.Submit>
+
+        {productPosted && <p>Product Posted!</p>}
       </Form.Root>
     </div>
   );
