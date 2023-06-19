@@ -5,7 +5,7 @@ export default function Navbar() {
   return (
     <header>
       <nav className="flex justify-between bg-rose-200 text-white py-4 px-24 text-black">
-        <Link className="  text-3xl font-bold" href="">
+        <Link className="text-3xl font-bold" href="/">
           Karen Gómez
         </Link>
         <ul className="flex justify-between items-center w-40 ">
