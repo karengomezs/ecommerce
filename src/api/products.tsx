@@ -29,16 +29,16 @@ export async function saveProduct({ id, ...product }: Product) {
   }
 }
 
-// export async function getPost() {
-//   try {
-//     const postRef = collection(db, "posts");
-//     const q = query(postRef, orderBy("date", "desc"));
-//     const querySnapShot = await getDocs(q);
-//     return querySnapShot;
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
+export async function getproducts() {
+  try {
+    const productRef = collection(db, "product");
+    const q = query(productRef, orderBy("date", "desc"));
+    const querySnapShot = await getDocs(q);
+    return querySnapShot;
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 // export async function deletePost(id: string) {
 //   try {
