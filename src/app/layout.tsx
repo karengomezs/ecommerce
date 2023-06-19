@@ -2,6 +2,7 @@ import "./globals.css";
 import { Poppins } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import Navbar from "./components/Navbar";
+import { CartProvider } from "./context/cart-context";
 
 const inter = Poppins({
   weight: "300",
@@ -21,12 +22,14 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <body className={`${inter.className}  h-screen`}>
-          <Navbar />
-          {children}
-        </body>
-      </html>
+      <CartProvider>
+        <html lang="en">
+          <body className={`${inter.className}  h-screen`}>
+            <Navbar />
+            {children}
+          </body>
+        </html>
+      </CartProvider>
     </ClerkProvider>
   );
 }

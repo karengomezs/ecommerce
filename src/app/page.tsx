@@ -10,19 +10,23 @@ export default async function Home() {
   }) as Product[];
 
   const products = productsData.map((product) => {
+    console.log(product);
+
     return (
       <div key={product.id} className="w-60 border border-rose-700 rounded-md ">
         <Image
           width={240}
           height={150}
           className="rounded-t-md object-cover"
-          src="/imagen.jpg"
+          src={product.img}
+          // src="/imagen.jpg"
           alt=""
         />
-        <div className="px-2">
+        <div className="px-2 grid">
           <p>{product.name}</p>
           <p>{product.userName}</p>
           <p className="mt-3">${product.price}</p>
+          <button className="bg-rose-200 p-2 my-2">Add to cart </button>
         </div>
       </div>
     );

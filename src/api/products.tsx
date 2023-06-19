@@ -15,7 +15,7 @@ export async function uploadImage(file: File) {
   const fileRef = ref(storage, Date.now().toString() + "_" + file.name);
 
   const snapShot = await uploadBytes(fileRef, file);
-  const urlImg = await getDownloadURL(snapShot.ref);
+  const urlImg = await getDownloadURL(fileRef);
 
   return { snapShot, urlImg };
 }
