@@ -8,7 +8,7 @@ import React, {
 
 //estos son los tipos
 interface CartContext {
-  items: Product[] | [];
+  items: Product[];
   setItems: Dispatch<SetStateAction<Product[] | []>>;
 }
 

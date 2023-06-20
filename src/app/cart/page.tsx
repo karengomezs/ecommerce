@@ -6,12 +6,20 @@ import CartContext from "../context/cart-context";
 export default function Cart() {
   const cartState = useContext(CartContext);
 
+  //esto es para eliminar los elementos duplicados en valor de ese array del estado global
   const dataArr = new Set(cartState?.items);
   let products = [...dataArr].sort((a, b) => {
     //este sort es para ordenarlos en la página donde se renderiza por los id de cada elemento
     return a.id.localeCompare(b.id);
   });
 
+  const suma = cartState.items.reduce((acumulador, product) => {
+    return acumulador + product.price;
+  }, 0);
+
+  console.log(suma);
+
+  //acá renderizo ya el array sin elementos duplicados
   const cartProducts = products.map((product) => {
     //comparo el id de cada item del arreglo que está en el context, con los id del nuevo array sin
     //objetos duplicados, y solo me devuelve solo los elementos que coinciden por id comparando los dos arr
@@ -81,6 +89,7 @@ export default function Cart() {
   return (
     <div className="px-24">
       <main className="flex flex-col justify-center gap-4">{cartProducts}</main>
+      <h1>TOTAL: {suma}</h1>
     </div>
   );
 }
