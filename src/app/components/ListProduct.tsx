@@ -3,12 +3,15 @@
 import { useContext } from "react";
 import Image from "next/image";
 import CartContext from "../context/cart-context";
+import { saveToCart } from "@/api/cart";
+import { useUser } from "@clerk/nextjs";
 
 export default function ListProducts({
   productsData,
 }: {
   productsData: Product[];
 }) {
+  const { user } = useUser();
   const cartState = useContext(CartContext);
 
   const products = productsData.map((product) => {
@@ -30,8 +33,15 @@ export default function ListProducts({
           <p className="mt-3">${product.price}</p>
           <button
             className="bg-rose-200 p-2 my-2"
-            onClick={() => {
-              cartState.setItems([product, ...cartState.items]);
+            onClick={async () => {
+              try {
+                if (user?.id) {
+                  await saveToCart(user?.id, product);
+                  cartState.setItems([product, ...cartState.items]);
+                }
+              } catch (error) {
+                console.log(error);
+              }
             }}
           >
             Add to cart

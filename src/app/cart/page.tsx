@@ -1,9 +1,12 @@
 "use client";
 
 import { useContext } from "react";
+import { useUser } from "@clerk/nextjs";
 import CartContext from "../context/cart-context";
+import { saveToCart } from "@/api/cart";
 
 export default function Cart() {
+  const { user } = useUser();
   const cartState = useContext(CartContext);
 
   //esto es para eliminar los elementos duplicados en valor de ese array del estado global
@@ -16,8 +19,6 @@ export default function Cart() {
   const suma = cartState.items.reduce((acumulador, product) => {
     return acumulador + product.price;
   }, 0);
-
-  console.log(suma);
 
   //acá renderizo ya el array sin elementos duplicados
   const cartProducts = products.map((product) => {
@@ -67,15 +68,24 @@ export default function Cart() {
             {/* por cada iteración, saco el largo del array que me da las coincidencias entre ids */}
             <p>{idRep.length}</p>
             <button
-              onClick={() => {
-                //cada vez que clickeo el botón de "+" vuelvo y agrego el elemento al context
-                // cartState.setItems([product, ...cartState.items]);
-                //ese parámetro es el estado actual, current items es el último estado que haya quedado
-                //en el estado, es lo mismo que la línea de arriba pero esta es la forma recomendada
-                cartState.setItems((currentItems) => [
-                  product,
-                  ...currentItems,
-                ]);
+              onClick={async () => {
+                try {
+                  if (user?.id) {
+                    await saveToCart(user?.id, product);
+
+                    //cada vez que clickeo el botón de "+" vuelvo y agrego el elemento al context
+                    // cartState.setItems([product, ...cartState.items]);
+                    //ese parámetro es el estado actual, current items es el último estado que haya quedado
+                    //en el estado, es lo mismo que la línea de arriba pero esta es la forma recomendada
+
+                    cartState.setItems((currentItems) => [
+                      product,
+                      ...currentItems,
+                    ]);
+                  }
+                } catch (error) {
+                  console.log(error);
+                }
               }}
             >
               +
