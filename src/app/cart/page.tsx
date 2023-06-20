@@ -92,7 +92,7 @@ export default function Cart() {
         {cartState.items.length !== 0 ? (
           cartProducts
         ) : (
-          <p>Still you have anything in your cart</p>
+          <p>Still you don´t have anything in your cart</p>
         )}
       </main>
       <h1>TOTAL: {suma}</h1>
