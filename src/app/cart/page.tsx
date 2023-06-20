@@ -10,9 +10,7 @@ export default function Cart() {
   let products = [...dataArr];
 
   const cartProducts = products.map((product) => {
-    const idRep = cartState.items.filter((p) => {
-      return p.id === product.id;
-    });
+    const idRep = cartState.items.filter((p) => p.id === product.id);
 
     return (
       <div
