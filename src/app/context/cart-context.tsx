@@ -8,18 +8,18 @@ import React, {
 
 //estos son los tipos
 interface CartContext {
-  items: Product | undefined;
-  setItems: Dispatch<SetStateAction<Product | undefined>>;
+  items: Product[] | [];
+  setItems: Dispatch<SetStateAction<Product[] | []>>;
 }
 
 const CartContext = createContext<CartContext>({
   //estos son los valores iniciales del context
-  items: undefined,
+  items: [],
   setItems: () => {},
 });
 
 export const CartProvider = (props: { children: React.ReactNode }) => {
-  const [items, setItems] = useState<CartContext["items"]>();
+  const [items, setItems] = useState<CartContext["items"]>([]);
 
   return (
     <CartContext.Provider value={{ items, setItems }}>

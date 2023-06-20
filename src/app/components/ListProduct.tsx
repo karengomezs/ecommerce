@@ -35,7 +35,7 @@ export default function ListProducts({
           <button
             className="bg-rose-200 p-2 my-2"
             onClick={() => {
-              cartState.setItems(product);
+              cartState.setItems([product, ...cartState.items]);
             }}
           >
             Add to cart
