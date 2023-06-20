@@ -13,7 +13,6 @@ export default async function Home() {
 
   return (
     <div className="px-24">
-      <h1>holas here are my products</h1>
       <ListProducts productsData={productsData} />
     </div>
   );

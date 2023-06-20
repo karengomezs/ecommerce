@@ -4,7 +4,7 @@ import { UserButton } from "@clerk/nextjs";
 export default function Navbar() {
   return (
     <header>
-      <nav className="flex justify-between bg-rose-200 text-white py-4 px-24 text-black">
+      <nav className="flex justify-between bg-rose-200 text-white py-4 px-24 mb-10 text-black">
         <Link className="text-3xl font-bold" href="/">
           Karen Gómez
         </Link>

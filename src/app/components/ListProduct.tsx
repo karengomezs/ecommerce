@@ -4,10 +4,6 @@ import { useContext } from "react";
 import Image from "next/image";
 import CartContext from "../context/cart-context";
 
-// interface props {
-//   productsData: Product[];
-// }
-
 export default function ListProducts({
   productsData,
 }: {
