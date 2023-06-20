@@ -8,20 +8,21 @@ import CartContext from "../context/cart-context";
 //   productsData: Product[];
 // }
 
-export default async function ListProducts({
+export default function ListProducts({
   productsData,
 }: {
   productsData: Product[];
 }) {
-  //   const cartState = useContext(CartContext);
+  const cartState = useContext(CartContext);
 
   const products = productsData.map((product) => {
-    console.log({ product });
-
     return (
-      <div key={product.id} className="w-60 border border-rose-700 rounded-md ">
+      <div
+        key={product.id}
+        className="w-[80%] border border-rose-700 rounded-md "
+      >
         <Image
-          width={240}
+          width={300}
           height={150}
           className="rounded-t-md object-cover"
           src={product.img}
@@ -33,9 +34,9 @@ export default async function ListProducts({
           <p className="mt-3">${product.price}</p>
           <button
             className="bg-rose-200 p-2 my-2"
-            // onClick={() => {
-            //   cartState.setItems(product);
-            // }}
+            onClick={() => {
+              cartState.setItems(product);
+            }}
           >
             Add to cart
           </button>
@@ -45,8 +46,8 @@ export default async function ListProducts({
   });
 
   return (
-    <div className="px-24">
-      <div className="grid grid-cols-2 gap-5">{products}</div>
+    <div className="grid grid-cols-4 justify-items-center gap-5">
+      {products}
     </div>
   );
 }
