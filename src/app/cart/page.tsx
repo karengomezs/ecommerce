@@ -35,10 +35,11 @@ export default function Cart() {
           <div className="flex gap-4  rounded-md [&>*]:bg-slate-300 [&>*]:px-4 [&>*]:rounded-md">
             <button
               onClick={() => {
-                let newArray = cartState.items.filter((p) => {
-                  return p.id !== product.id;
-                });
-
+                const index = cartState.items.findIndex(
+                  (e) => e.id === product.id
+                );
+                let newArray = [...cartState.items];
+                newArray.splice(index, 1);
                 cartState.setItems([...newArray]);
               }}
             >
