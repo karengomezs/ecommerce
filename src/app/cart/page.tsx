@@ -33,7 +33,17 @@ export default function Cart() {
           <p className="font-bold"> {product.name}</p>
           <p className="font-bold text-rose-600">$ {product.price}</p>
           <div className="flex gap-4  rounded-md [&>*]:bg-slate-300 [&>*]:px-4 [&>*]:rounded-md">
-            <button>-</button>
+            <button
+              onClick={() => {
+                let newArray = cartState.items.filter((p) => {
+                  return p.id !== product.id;
+                });
+
+                cartState.setItems([...newArray]);
+              }}
+            >
+              -
+            </button>
             {/* por cada iteración, saco el largo del array que me da las coincidencias entre ids */}
             <p>{idRep.length}</p>
             <button
