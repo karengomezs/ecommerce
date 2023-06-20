@@ -10,6 +10,10 @@ export default function Cart() {
   let products = [...dataArr];
 
   const cartProducts = products.map((product) => {
+    const idRep = cartState.items.filter((p) => {
+      return p.id === product.id;
+    });
+
     return (
       <div
         key={product.id}
@@ -27,7 +31,7 @@ export default function Cart() {
           <p className="font-bold text-rose-600">$ {product.price}</p>
           <div className="flex gap-4  rounded-md [&>*]:bg-slate-300 [&>*]:px-4 [&>*]:rounded-md">
             <button>-</button>
-
+            <p>{idRep.length}</p>
             <button>+</button>
           </div>
         </div>
