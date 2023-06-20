@@ -6,7 +6,10 @@ import CartContext from "../context/cart-context";
 export default function Cart() {
   const cartState = useContext(CartContext);
 
-  const cartProducts = cartState?.items.map((product) => {
+  const dataArr = new Set(cartState?.items);
+  let products = [...dataArr];
+
+  const cartProducts = products.map((product) => {
     return (
       <div
         key={product.id}
@@ -16,15 +19,15 @@ export default function Cart() {
           width={250}
           height={90}
           className="rounded-s-md object-cover "
-          //   src="/imagen.jpg"
           src={product.img}
           alt=""
         />
         <div className="w-full flex items-center justify-between px-10">
-          <p className="font-bold">Product: cualquier cosa</p>
-          <p className="font-bold text-rose-600">Price: $584</p>
+          <p className="font-bold"> {product.name}</p>
+          <p className="font-bold text-rose-600">$ {product.price}</p>
           <div className="flex gap-4  rounded-md [&>*]:bg-slate-300 [&>*]:px-4 [&>*]:rounded-md">
             <button>-</button>
+
             <button>+</button>
           </div>
         </div>
