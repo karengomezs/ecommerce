@@ -88,7 +88,13 @@ export default function Cart() {
 
   return (
     <div className="px-24">
-      <main className="flex flex-col justify-center gap-4">{cartProducts}</main>
+      <main className="flex flex-col justify-center gap-4">
+        {cartState.items.length !== 0 ? (
+          cartProducts
+        ) : (
+          <p>Still you have anything in your cart</p>
+        )}
+      </main>
       <h1>TOTAL: {suma}</h1>
     </div>
   );
