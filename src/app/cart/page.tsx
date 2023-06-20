@@ -7,7 +7,9 @@ export default function Cart() {
   const cartState = useContext(CartContext);
 
   const dataArr = new Set(cartState?.items);
-  let products = [...dataArr];
+  let products = [...dataArr].sort((a, b) => {
+    return a.id.localeCompare(b.id);
+  });
 
   const cartProducts = products.map((product) => {
     const idRep = cartState.items.filter((p) => p.id === product.id);
@@ -30,7 +32,13 @@ export default function Cart() {
           <div className="flex gap-4  rounded-md [&>*]:bg-slate-300 [&>*]:px-4 [&>*]:rounded-md">
             <button>-</button>
             <p>{idRep.length}</p>
-            <button>+</button>
+            <button
+              onClick={() => {
+                cartState.setItems([product, ...cartState.items]);
+              }}
+            >
+              +
+            </button>
           </div>
         </div>
       </div>
