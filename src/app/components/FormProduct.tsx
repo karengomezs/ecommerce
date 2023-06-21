@@ -14,7 +14,7 @@ export default function FormProduct() {
   const [buttonDisable, setButtonDisable] = useState<boolean>(false);
 
   return (
-    <div className="flex flex-col items-center mt-20 text-black font-semibold">
+    <div className="flex flex-col items-center mx-auto w-96 py-8 px-14 rounded-md border border-slate-300 mt-20 text-black font-semibold">
       <h2 className="text-2xl mb-5">Create a product</h2>
       <Form.Root
         ref={ref}
@@ -67,7 +67,7 @@ export default function FormProduct() {
                   setProductPosted(false);
                 }}
                 value={productName}
-                className="w-60 p-2 rounded-md border border-slate-300 bg-slate-100"
+                className="w-full p-2 rounded-md border border-slate-300 bg-slate-100"
                 type="text"
                 required
               />
@@ -84,7 +84,7 @@ export default function FormProduct() {
                   setProductPrice(parseInt(e.target.value));
                 }}
                 value={productPrice}
-                className="w-60 p-2 rounded-md border border-slate-300 bg-slate-100"
+                className="w-full p-2 rounded-md border border-slate-300 bg-slate-100"
                 type="text"
                 required
               />
@@ -100,7 +100,7 @@ export default function FormProduct() {
                 onChange={(e: ChangeEvent<HTMLInputElement>) => {
                   setProductImg(e.target.files?.[0]);
                 }}
-                className="w-60 p-2 rounded-md border border-slate-300 bg-slate-100"
+                className="w-full p-2 rounded-md border border-slate-300 bg-slate-100"
                 type="file"
                 required
               />
