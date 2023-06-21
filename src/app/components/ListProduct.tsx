@@ -18,21 +18,24 @@ export default function ListProducts({
     return (
       <div
         key={product.id}
-        className="w-[80%] border border-rose-700 rounded-md "
+        className="w-[80%] border border-slate-300 bg-slate-100 rounded-md "
       >
         <Image
           width={300}
-          height={150}
-          className="rounded-t-md object-cover"
+          height={200}
+          className="rounded-t-md object-cover h-[250px]"
           src={product.img}
           alt=""
         />
         <div className="px-2 grid">
           <p>{product.name}</p>
-          <p>{product.userName}</p>
-          <p className="mt-3">${product.price}</p>
+          <p>
+            <span className="text-red-600 font-bold">Seller:</span>{" "}
+            {product.userName}
+          </p>
+          <p className="mt-3 text-red-600 font-bold">$ {product.price}</p>
           <button
-            className="bg-rose-200 p-2 my-2"
+            className="rounded-md bg-emerald-900 hover:bg-emerald-700 text-white font-bold p-2 my-2"
             onClick={async () => {
               try {
                 if (user?.id) {
