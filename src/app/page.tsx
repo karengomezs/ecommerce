@@ -12,7 +12,7 @@ export default async function Home() {
   }) as Product[];
 
   return (
-    <div className="px-24">
+    <div className="px-24 pb-10">
       <ListProducts productsData={productsData} />
     </div>
   );
