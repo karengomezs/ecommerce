@@ -27,13 +27,13 @@ export default function ListProducts({
           src={product.img}
           alt=""
         />
-        <div className="px-2 grid">
-          <p>{product.name}</p>
+        <div className="px-2 grid gap-2">
+          <p className="font-bold mt-3">{product.name}</p>
           <p>
             <span className="text-red-600 font-bold">Seller:</span>{" "}
             {product.userName}
           </p>
-          <p className="mt-3 text-red-600 font-bold">$ {product.price}</p>
+          <p className=" text-red-600 font-bold">$ {product.price}</p>
           <button
             className="rounded-md bg-emerald-900 hover:bg-emerald-700 text-white font-bold p-2 my-2"
             onClick={async () => {
