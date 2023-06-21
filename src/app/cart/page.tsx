@@ -1,17 +1,30 @@
 "use client";
 
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
 import CartContext from "../context/cart-context";
-import { saveToCart } from "@/api/cart";
+import { getproducts, saveToCart } from "@/api/cart";
 
 export default function Cart() {
   const { user } = useUser();
   const cartState = useContext(CartContext);
 
+  useEffect(() => {
+    if (user?.id) {
+      getproducts(user?.id).then((data) => {
+        const newArray = data?.docs.map((product) =>
+          product.data()
+        ) as Product[];
+        cartState.setItems(newArray);
+      });
+    }
+  }, [user?.id]);
+  console.log(cartState?.items);
+
   //esto es para eliminar los elementos duplicados en valor de ese array del estado global
-  const dataArr = new Set(cartState?.items);
-  let products = [...dataArr].sort((a, b) => {
+  const unique = [...new Map(cartState.items.map((m) => [m.id, m])).values()];
+
+  let products = [...unique].sort((a, b) => {
     //este sort es para ordenarlos en la página donde se renderiza por los id de cada elemento
     return a.id.localeCompare(b.id);
   });
