@@ -24,7 +24,7 @@ export default function RootLayout({
     <ClerkProvider>
       <CartProvider>
         <html lang="en">
-          <body className={`${inter.className}  h-screen`}>
+          <body className={`${inter.className} h-screen`}>
             <Navbar />
             {children}
           </body>

@@ -14,7 +14,7 @@ export default function FormProduct() {
   const [buttonDisable, setButtonDisable] = useState<boolean>(false);
 
   return (
-    <div className="flex flex-col items-center mx-auto w-96 py-8 px-14 rounded-md border border-slate-300 mt-20 text-black font-semibold">
+    <div className=" flex flex-col items-center mx-auto mt-16  w-96 py-8 px-14 rounded-md border border-slate-300 text-black font-semibold">
       <h2 className="text-2xl mb-5">Create a product</h2>
       <Form.Root
         ref={ref}

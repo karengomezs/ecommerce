@@ -42,7 +42,7 @@ export default function Cart() {
     return (
       <div
         key={product.id}
-        className="w-full flex h-32 border border-rose-700 rounded-md "
+        className="w-full flex h-32 border border-slate-300 bg-slate-100 rounded-md "
       >
         <img
           width={250}
@@ -52,8 +52,8 @@ export default function Cart() {
           alt=""
         />
         <div className="w-full flex items-center justify-between px-10">
-          <p className="font-bold"> {product.name}</p>
-          <p className="font-bold text-rose-600">$ {product.price}</p>
+          <p className="font-bold flex-1"> {product.name}</p>
+          <p className="font-bold flex-1 text-red-600">$ {product.price}</p>
           <div className="flex gap-4  rounded-md [&>*]:bg-slate-300 [&>*]:px-4 [&>*]:rounded-md">
             <button
               onClick={async () => {
