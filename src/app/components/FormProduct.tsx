@@ -14,7 +14,7 @@ export default function FormProduct() {
   const [buttonDisable, setButtonDisable] = useState<boolean>(false);
 
   return (
-    <div className="flex flex-col items-center mt-28 text-black font-semibold">
+    <div className="flex flex-col items-center mt-20 text-black font-semibold">
       <h2 className="text-2xl mb-5">Create a product</h2>
       <Form.Root
         ref={ref}
@@ -67,7 +67,7 @@ export default function FormProduct() {
                   setProductPosted(false);
                 }}
                 value={productName}
-                className="w-60 p-2 rounded-md border border-rose-300"
+                className="w-60 p-2 rounded-md border border-slate-300 bg-slate-100"
                 type="text"
                 required
               />
@@ -84,7 +84,7 @@ export default function FormProduct() {
                   setProductPrice(parseInt(e.target.value));
                 }}
                 value={productPrice}
-                className="w-60 p-2 rounded-md border border-rose-300"
+                className="w-60 p-2 rounded-md border border-slate-300 bg-slate-100"
                 type="text"
                 required
               />
@@ -100,7 +100,7 @@ export default function FormProduct() {
                 onChange={(e: ChangeEvent<HTMLInputElement>) => {
                   setProductImg(e.target.files?.[0]);
                 }}
-                className="w-60 p-2 rounded-md border border-rose-300"
+                className="w-60 p-2 rounded-md border border-slate-300 bg-slate-100"
                 type="file"
                 required
               />
@@ -112,7 +112,7 @@ export default function FormProduct() {
           <button
             disabled={buttonDisable}
             type="submit"
-            className="w-60 p-2 mt-3 mx-auto rounded-md bg-rose-500 hover:bg-rose-600 hover:text-white  text-center font-bold"
+            className="w-60 p-2 mt-3 mx-auto rounded-md bg-emerald-900 hover:bg-emerald-700 text-white font-bold p-2 my-2"
           >
             {buttonDisable ? <p>Creating product</p> : <p>Post Product</p>}
           </button>
