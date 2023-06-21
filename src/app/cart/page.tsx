@@ -3,7 +3,7 @@
 import { useContext, useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
 import CartContext from "../context/cart-context";
-import { getproducts, saveToCart } from "@/api/cart";
+import { deletePost, getproducts, saveToCart } from "@/api/cart";
 
 export default function Cart() {
   const { user } = useUser();
@@ -56,24 +56,31 @@ export default function Cart() {
           <p className="font-bold text-rose-600">$ {product.price}</p>
           <div className="flex gap-4  rounded-md [&>*]:bg-slate-300 [&>*]:px-4 [&>*]:rounded-md">
             <button
-              onClick={() => {
-                //necesito eliminar el elemento que seleccioné del array
+              onClick={async () => {
+                try {
+                  if (user?.id) {
+                    await deletePost(user.id, product.id);
+                    //necesito eliminar el elemento que seleccioné del array
 
-                const index = cartState.items.findIndex(
-                  //comparo cual id de los elementos del array del estado global, coincide con uno
-                  //de los elementos que estoy renderizando en el nuevo array y me devuelve el índice
-                  //del primero que coincida, esto porque puedo tener más de un articulo con el mismo id
-                  //en el carrito, ej: 2 gorras con el id: 7645 y solo quiero que me elimine de a una
-                  (e) => e.id === product.id
-                );
+                    const index = cartState.items.findIndex(
+                      //comparo cual id de los elementos del array del estado global, coincide con uno
+                      //de los elementos que estoy renderizando en el nuevo array y me devuelve el índice
+                      //del primero que coincida, esto porque puedo tener más de un articulo con el mismo id
+                      //en el carrito, ej: 2 gorras con el id: 7645 y solo quiero que me elimine de a una
+                      (e) => e.id === product.id
+                    );
 
-                //hago una copia del original para no mutarlo
-                let newArray = [...cartState.items];
-                //le digo a ese array copia, que elimine ese unico indice que le pasé
-                newArray.splice(index, 1);
-                //ahora al estado global le paso el array copia ya actualizado con todos los que quedan
-                //menos el eliminado
-                cartState.setItems([...newArray]);
+                    //hago una copia del original para no mutarlo
+                    let newArray = [...cartState.items];
+                    //le digo a ese array copia, que elimine ese unico indice que le pasé
+                    newArray.splice(index, 1);
+                    //ahora al estado global le paso el array copia ya actualizado con todos los que quedan
+                    //menos el eliminado
+                    cartState.setItems([...newArray]);
+                  }
+                } catch (error) {
+                  console.error(error);
+                }
               }}
             >
               -

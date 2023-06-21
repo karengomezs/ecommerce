@@ -39,11 +39,3 @@ export async function getproducts() {
     console.error(error);
   }
 }
-
-// export async function deletePost(id: string) {
-//   try {
-//     return await deleteDoc(doc(db, "posts", id));
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
