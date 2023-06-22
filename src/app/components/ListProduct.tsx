@@ -2,15 +2,17 @@
 
 import { useContext } from "react";
 import Image from "next/image";
+import { useUser } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 import CartContext from "../context/cart-context";
 import { saveToCart } from "@/api/cart";
-import { useUser } from "@clerk/nextjs";
 
 export default function ListProducts({
   productsData,
 }: {
   productsData: Product[];
 }) {
+  const router = useRouter();
   const { user } = useUser();
   const cartState = useContext(CartContext);
 
@@ -42,6 +44,8 @@ export default function ListProducts({
                 if (user?.id) {
                   await saveToCart(user?.id, product);
                   cartState.setItems([product, ...cartState.items]);
+                } else {
+                  router.push("/sign-in");
                 }
               } catch (error) {
                 console.log(error);
