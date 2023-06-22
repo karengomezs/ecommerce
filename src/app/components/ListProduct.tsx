@@ -18,10 +18,7 @@ export default function ListProducts({
 
   const products = productsData.map((product) => {
     return (
-      <div
-        key={product.id}
-        className="grid border border-slate-300 bg-slate-100 hover:brightness-90 cursor-pointer"
-      >
+      <div key={product.id} className="grid hover:brightness-90 cursor-pointer">
         <Image
           width={150}
           height={100}
