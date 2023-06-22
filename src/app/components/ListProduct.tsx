@@ -18,23 +18,24 @@ export default function ListProducts({
     return (
       <div
         key={product.id}
-        className="w-[80%] border border-slate-300 bg-slate-100 rounded-md "
+        className="grid border border-slate-300 bg-slate-100 "
       >
         <Image
-          width={300}
-          height={200}
-          className="rounded-t-md object-cover h-[250px]"
+          width={150}
+          height={100}
+          className="col-start-1 row-start-1 object-cover min-w-[285px] h-[350px]"
           src={product.img}
           alt=""
         />
-        <div className="px-2 grid gap-2">
-          <p className="font-bold mt-3">{product.name}</p>
-          <p>
-            <span className="text-red-600 font-bold">Seller:</span>{" "}
-            {product.userName}
-          </p>
-          <p className=" text-red-600 font-bold">$ {product.price}</p>
-          <button
+        <div className=" col-start-1 row-start-1 items-end  grid gap-2">
+          <div className="bg-slate-700/50 p-2">
+            <p className="text-xl font-extrabold text-white">{product.name}</p>
+            <p className="text-xs text-white font-bold">
+              by <span className="text-slate-300">{product.userName}</span>
+            </p>
+          </div>
+          {/* <p className=" text-red-600 font-bold">$ {product.price}</p> */}
+          {/* <button
             className="rounded-md bg-emerald-900 hover:bg-emerald-700 text-white font-bold p-2 my-2"
             onClick={async () => {
               try {
@@ -48,15 +49,13 @@ export default function ListProducts({
             }}
           >
             Add to cart
-          </button>
+          </button> */}
         </div>
       </div>
     );
   });
 
   return (
-    <div className="grid grid-cols-4 justify-items-center gap-5">
-      {products}
-    </div>
+    <div className="flex flex-wrap justify-items-center gap-2">{products}</div>
   );
 }

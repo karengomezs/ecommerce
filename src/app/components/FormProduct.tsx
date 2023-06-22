@@ -23,7 +23,7 @@ export default function FormProduct() {
           e.preventDefault();
 
           try {
-            if (!productImg) return;
+            if (!productImg || !user?.id) return;
 
             setButtonDisable(true);
 
@@ -34,7 +34,7 @@ export default function FormProduct() {
               name: productName,
               price: productPrice,
               img: img.urlImg,
-              userId: user?.id ?? "",
+              userId: user?.id,
               userName: user?.fullName ?? "",
               date: new Date(),
             };
