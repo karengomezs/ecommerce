@@ -27,7 +27,7 @@ export async function getproducts(id: string) {
   try {
     const productRef = collection(db, "cart", id, "productsCollection");
     const querySnapShot = await getDocs(productRef);
-    console.log(querySnapShot);
+
     return querySnapShot;
   } catch (error) {
     console.error(error);
@@ -41,7 +41,6 @@ export async function deletePost(userId: string, productId: string) {
     const results = await getDocs(q);
     const docRef = results.docs[0].ref;
     await deleteDoc(docRef);
-    //const delete = await deleteDoc(doc(db, ));
   } catch (error) {
     console.error(error);
   }

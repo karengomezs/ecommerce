@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import CartContext from "../context/cart-context";
 import {
@@ -13,6 +13,7 @@ import {
 export default function Cart() {
   const { user } = useUser();
   const cartState = useContext(CartContext);
+  const [buttonDisable, setButtonDisable] = useState<boolean>(false);
 
   useEffect(() => {
     if (user?.id) {
@@ -132,9 +133,13 @@ export default function Cart() {
           <p className="text-emerald-900 text-3xl text-right">{`TOTAL: $${suma}`}</p>
         </div>
         <button
+          disabled={
+            cartState.items.length !== 0 ? buttonDisable : !buttonDisable
+          }
           onClick={() => {
             if (user?.id) {
               deleteProductsCart(user?.id);
+              console.log(buttonDisable);
             }
           }}
           className="ml-auto bg-emerald-900 w-full p-2 rounded-md text-xl text-white font-bold"
