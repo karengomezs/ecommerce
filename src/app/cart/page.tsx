@@ -3,7 +3,12 @@
 import { useContext, useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
 import CartContext from "../context/cart-context";
-import { deletePost, getproducts, saveToCart } from "@/api/cart";
+import {
+  deletePost,
+  deleteProductsCart,
+  getproducts,
+  saveToCart,
+} from "@/api/cart";
 
 export default function Cart() {
   const { user } = useUser();
@@ -19,7 +24,6 @@ export default function Cart() {
       });
     }
   }, [user?.id]);
-  console.log(cartState?.items);
 
   //esto es para eliminar los elementos duplicados en valor de ese array del estado global
   const unique = [...new Map(cartState.items.map((m) => [m.id, m])).values()];
@@ -127,7 +131,14 @@ export default function Cart() {
         <div className="">
           <p className="text-emerald-900 text-3xl text-right">{`TOTAL: $${suma}`}</p>
         </div>
-        <button className="ml-auto bg-emerald-900 w-full p-2 rounded-md text-xl text-white font-bold">
+        <button
+          onClick={() => {
+            if (user?.id) {
+              deleteProductsCart(user?.id);
+            }
+          }}
+          className="ml-auto bg-emerald-900 w-full p-2 rounded-md text-xl text-white font-bold"
+        >
           Pay
         </button>
       </main>
