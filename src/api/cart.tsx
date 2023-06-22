@@ -1,14 +1,12 @@
 import { db } from "@/app/firebase";
 import {
-  DocumentReference,
   addDoc,
   collection,
   deleteDoc,
-  doc,
   getDocs,
   query,
-  setDoc,
   where,
+  writeBatch,
 } from "firebase/firestore";
 
 export async function saveToCart(id: string, product: Product) {
@@ -48,12 +46,22 @@ export async function deletePost(userId: string, productId: string) {
 
 export async function deleteProductsCart(userId: string) {
   try {
+    const batch = writeBatch(db);
+
     const refs = collection(db, "cart", userId, "productsCollection");
     const results = await getDocs(refs);
-    const array = results.docs;
-    for (const product of array) {
-      await deleteDoc(product.ref);
-    }
+
+    //esto es una forma de hacerlo
+    // const array = results.docs;
+    // for (const product of array) {
+    //   await deleteDoc(product.ref);
+    // }
+
+    //esta es otra
+    results.forEach((product) => {
+      batch.delete(product.ref);
+    });
+    await batch.commit();
   } catch (error) {
     console.error(error);
   }
