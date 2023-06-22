@@ -51,10 +51,10 @@ export default function Cart() {
           src={product.img}
           alt=""
         />
-        <div className="w-full flex items-center justify-between px-10">
-          <p className="font-bold flex-1"> {product.name}</p>
-          <p className="font-bold flex-1 text-red-600">$ {product.price}</p>
-          <div className="flex gap-4  rounded-md [&>*]:bg-slate-300 [&>*]:px-4 [&>*]:rounded-md">
+        <div className="w-full grid grid-rows-[auto_auto] py-5 items-center px-10">
+          <p className="font-bold text-xl"> {product.name}</p>
+          <div className="flex rounded-md [&>button]:border [&>button]:border-slate-500 [&>button]:w-8 [&>*]:rounded-md">
+            <p className="font-bold mr-4 text-lime-600">$ {product.price}</p>
             <button
               onClick={async () => {
                 try {
@@ -86,7 +86,7 @@ export default function Cart() {
               -
             </button>
             {/* por cada iteración, saco el largo del array que me da las coincidencias entre ids */}
-            <p>{idRep.length}</p>
+            <p className="mx-4">{idRep.length}</p>
             <button
               onClick={async () => {
                 try {
@@ -117,17 +117,20 @@ export default function Cart() {
   });
 
   return (
-    <div className="px-24">
-      <main className="flex flex-col justify-center gap-4">
+    <div className="  bg flex-1">
+      <main className="flex flex-col  p-5 gap-4 ml-auto h-full w-1/2 bg-white">
         {cartState.items.length !== 0 ? (
           cartProducts
         ) : (
           <p>Still you don´t have anything in your cart</p>
         )}
+        <div className="">
+          <p className="text-emerald-900 text-3xl text-right">{`TOTAL: $${suma}`}</p>
+        </div>
+        <button className="ml-auto bg-emerald-900 w-full p-2 rounded-md text-xl text-white font-bold">
+          Pay
+        </button>
       </main>
-      <div className="bg-emerald-900 w-20">
-        <p>{`TOTAL: ${suma}`}</p>
-      </div>
     </div>
   );
 }
