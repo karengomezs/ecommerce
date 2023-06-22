@@ -14,7 +14,7 @@ export default function FormProduct() {
   const [buttonDisable, setButtonDisable] = useState<boolean>(false);
 
   return (
-    <div className=" flex flex-col items-center mx-auto mt-16  w-96 py-8 px-14 rounded-md border border-slate-300 text-black font-semibold">
+    <div className="flex flex-col items-center justify-center h-full w-1/2 py-8 px-14  bg-white text-black font-semibold">
       <h2 className="text-2xl mb-5">Create a product</h2>
       <Form.Root
         ref={ref}
@@ -57,7 +57,7 @@ export default function FormProduct() {
           }
         }}
       >
-        <Form.Field className="mx-auto" name="name">
+        <Form.Field name="name">
           <div className="flex flex-col gap-1">
             <Form.Label className="">Name</Form.Label>
             <Form.Control asChild>
@@ -75,7 +75,7 @@ export default function FormProduct() {
           </div>
         </Form.Field>
 
-        <Form.Field className="mx-auto" name="price">
+        <Form.Field name="price">
           <div className="flex flex-col gap-1">
             <Form.Label className="">Price</Form.Label>
             <Form.Control asChild>
@@ -92,7 +92,7 @@ export default function FormProduct() {
           </div>
         </Form.Field>
 
-        <Form.Field className="mx-auto" name="image">
+        <Form.Field name="image">
           <div className="flex flex-col gap-1">
             <Form.Label className="">Image</Form.Label>
             <Form.Control asChild>
@@ -112,7 +112,7 @@ export default function FormProduct() {
           <button
             disabled={buttonDisable}
             type="submit"
-            className="w-60 p-2 mt-3 mx-auto rounded-md bg-emerald-900 hover:bg-emerald-700 text-white font-bold p-2 my-2"
+            className="w-full mx-auto rounded-md bg-emerald-900 hover:bg-emerald-700 text-white font-bold p-2 my-2"
           >
             {buttonDisable ? <p>Creating product</p> : <p>Post Product</p>}
           </button>

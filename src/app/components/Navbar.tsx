@@ -4,7 +4,7 @@ import { UserButton } from "@clerk/nextjs";
 export default function Navbar() {
   return (
     <header>
-      <nav className="flex justify-between bg-emerald-900  py-4 px-24 mb-10 text-white">
+      <nav className="flex justify-between bg-emerald-900  py-4 px-24  text-white">
         <Link className="flex items-center text-3xl" href="/">
           <p className=" px-3 py-1 border rounded-full">K</p>
           <div className="ms-4 gap-3 ">

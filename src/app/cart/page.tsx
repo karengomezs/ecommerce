@@ -125,7 +125,9 @@ export default function Cart() {
           <p>Still you don´t have anything in your cart</p>
         )}
       </main>
-      <h1>TOTAL: {suma}</h1>
+      <div className="bg-emerald-900 w-20">
+        <p>{`TOTAL: ${suma}`}</p>
+      </div>
     </div>
   );
 }
