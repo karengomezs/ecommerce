@@ -2,6 +2,8 @@
 
 import { useContext, useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
+
 import CartContext from "../context/cart-context";
 import {
   deletePost,
@@ -12,6 +14,7 @@ import {
 
 export default function Cart() {
   const { user } = useUser();
+  const router = useRouter();
   const cartState = useContext(CartContext);
   const [buttonDisable, setButtonDisable] = useState<boolean>(false);
 
@@ -139,7 +142,7 @@ export default function Cart() {
           onClick={() => {
             if (user?.id) {
               deleteProductsCart(user?.id);
-              console.log(buttonDisable);
+              router.push("/shop-success");
             }
           }}
           className="ml-auto bg-emerald-900 w-full p-2 rounded-md text-xl text-white font-bold"
