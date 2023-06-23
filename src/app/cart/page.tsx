@@ -139,11 +139,11 @@ export default function Cart() {
           disabled={
             cartState.items.length !== 0 ? buttonDisable : !buttonDisable
           }
-          onClick={() => {
+          onClick={async () => {
             if (user?.id) {
-              deleteProductsCart(user?.id);
-              router.push("/shop-success");
+              await deleteProductsCart(user?.id);
               cartState.setItems([]);
+              router.push("/shop-success");
             }
           }}
           className="ml-auto bg-emerald-900 w-full p-2 rounded-md text-xl text-white font-bold"
