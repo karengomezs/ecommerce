@@ -9,8 +9,8 @@ export default function CartIcon() {
   console.log({ cartState });
 
   return (
-    <>
-      <Link href="/cart">
+    <div className="relative">
+      <Link className="" href="/cart">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -26,7 +26,11 @@ export default function CartIcon() {
           />
         </svg>
       </Link>
-      <p>{cartState?.items?.length}</p>
-    </>
+      {cartState.items.length > 0 && (
+        <p className="absolute bottom-0 right-[-12px] bg-orange-400 rounded-full font-bold text-center w-6">
+          {cartState?.items?.length}
+        </p>
+      )}
+    </div>
   );
 }

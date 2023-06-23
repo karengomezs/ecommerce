@@ -143,6 +143,7 @@ export default function Cart() {
             if (user?.id) {
               deleteProductsCart(user?.id);
               router.push("/shop-success");
+              cartState.setItems([]);
             }
           }}
           className="ml-auto bg-emerald-900 w-full p-2 rounded-md text-xl text-white font-bold"
