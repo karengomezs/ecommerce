@@ -1,33 +1,16 @@
 "use client";
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 
 import CartContext from "../context/cart-context";
-import {
-  deletePost,
-  deleteProductsCart,
-  getproducts,
-  saveToCart,
-} from "@/api/cart";
+import { deletePost, deleteProductsCart, saveToCart } from "@/api/cart";
 
 export default function Cart() {
   const { user } = useUser();
   const router = useRouter();
   const cartState = useContext(CartContext);
-  const [buttonDisable, setButtonDisable] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (user?.id) {
-      getproducts(user?.id).then((data) => {
-        const newArray = data?.docs.map((product) =>
-          product.data()
-        ) as Product[];
-        cartState.setItems(newArray);
-      });
-    }
-  }, [user?.id]);
 
   //esto es para eliminar los elementos duplicados en valor de ese array del estado global
   const unique = [...new Map(cartState.items.map((m) => [m.id, m])).values()];
@@ -136,9 +119,7 @@ export default function Cart() {
           <p className="text-emerald-900 text-3xl text-right">{`TOTAL: $${suma}`}</p>
         </div>
         <button
-          disabled={
-            cartState.items.length !== 0 ? buttonDisable : !buttonDisable
-          }
+          disabled={cartState.items.length === 0}
           onClick={async () => {
             if (user?.id) {
               await deleteProductsCart(user?.id);
