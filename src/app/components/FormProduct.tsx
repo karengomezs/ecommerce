@@ -78,11 +78,6 @@ export default function FormProduct() {
             <Form.Control asChild>
               <input
                 {...register("name")}
-                // onChange={(e) => {
-                //   setProductName(e.target.value);
-                //   setProductPosted(false);
-                // }}
-
                 className="w-full p-2 rounded-md border border-slate-300 bg-slate-100"
               />
             </Form.Control>
@@ -99,10 +94,6 @@ export default function FormProduct() {
                     return value === "" ? undefined : parseInt(value, 10);
                   },
                 })}
-                // onChange={(e) => {
-                //   setProductPrice(parseInt(e.target.value));
-                // }}
-
                 className="w-full p-2 rounded-md border border-slate-300 bg-slate-100"
                 type="number"
               />
@@ -116,9 +107,6 @@ export default function FormProduct() {
             <Form.Control asChild>
               <input
                 {...register("img")}
-                // onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                //   setProductImg(e.target.files?.[0]);
-                // }}
                 className="w-full p-2 rounded-md border border-slate-300 bg-slate-100"
                 type="file"
               />
