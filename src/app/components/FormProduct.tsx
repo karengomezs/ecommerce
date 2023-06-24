@@ -12,7 +12,6 @@ const schema = z
     name: z.string().min(3, { message: "Product name is required!" }),
     price: z.number(),
     img: z.any().refine((files) => files.length === 1, "img required"),
-    // img: z.object({ file: z.instanceof(File) })
   })
   .required();
 
@@ -36,33 +35,20 @@ export default function FormProduct() {
 
       const img = await uploadImage(data.img[0]);
 
-      console.log({ img });
+      let product: Product = {
+        id: "",
+        name: data.name,
+        price: data.price,
+        img: img.urlImg,
+        userId: user?.id,
+        userName: user?.fullName ?? "",
+        date: new Date(),
+      };
 
-      // let product: Product = {
-      //   id: "",
-      //   name: productName,
-      //   price: productPrice,
-      //   img: img.urlImg,
-      //   userId: user?.id,
-      //   userName: user?.fullName ?? "",
-      //   date: new Date(),
-      // };
-
-      // const doc = await saveProduct(product);
-      // product.id = doc?.id ?? Date.now().toString();
-
-      //     setPostsArray([post, ...postsArray]);
-      // setProductImg(undefined);
-      // setProductName("");
-      // setProductPrice(0);
-      //this function clear all form elements
-      // ref.current?.reset();
-
-      // setProductPosted(true);
-      // setButtonDisable(false);
+      const doc = await saveProduct(product);
+      product.id = doc?.id ?? Date.now().toString();
     } catch (error) {
-      // console.error(error);
-      // setButtonDisable(false);
+      console.error(error);
     }
   };
 
