@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as Form from "@radix-ui/react-form";
 import { useUser } from "@clerk/nextjs";
 import { saveProduct, uploadImage } from "@/api/products";
+import { useEffect } from "react";
 
 const schema = z
   .object({
@@ -20,21 +21,28 @@ type Form = z.infer<typeof schema>;
 export default function FormProduct() {
   const { user } = useUser();
   const {
+    reset,
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, isSubmitSuccessful },
+    formState: { errors, isSubmitting, isSubmitted, isSubmitSuccessful },
   } = useForm<Form>({ resolver: zodResolver(schema) });
 
   console.log({ errors });
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      reset();
+    }, 2000);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [isSubmitSuccessful]);
+
   const onSubmit: SubmitHandler<Form> = async (data) => {
     try {
       if (!user?.id) return;
-
       console.log({ data });
-
       const img = await uploadImage(data.img[0]);
-
       let product: Product = {
         id: "",
         name: data.name,
@@ -44,7 +52,6 @@ export default function FormProduct() {
         userName: user?.fullName ?? "",
         date: new Date(),
       };
-
       const doc = await saveProduct(product);
       product.id = doc?.id ?? Date.now().toString();
     } catch (error) {
