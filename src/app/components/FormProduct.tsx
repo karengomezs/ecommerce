@@ -1,5 +1,5 @@
 "use client";
-import { ChangeEvent, useState, useRef } from "react";
+
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,7 +11,8 @@ const schema = z
   .object({
     name: z.string().min(3, { message: "Product name is required!" }),
     price: z.number(),
-    img: z.object({ file: z.instanceof(File) }),
+    img: z.any().refine((files) => files.length === 1, "img required"),
+    // img: z.object({ file: z.instanceof(File) })
   })
   .required();
 
@@ -25,15 +26,17 @@ export default function FormProduct() {
     formState: { errors, isSubmitting, isSubmitSuccessful },
   } = useForm<Form>({ resolver: zodResolver(schema) });
 
-  console.log(errors);
+  console.log({ errors });
 
   const onSubmit: SubmitHandler<Form> = async (data) => {
     try {
       if (!user?.id) return;
 
-      console.log(data);
+      console.log({ data });
 
-      // const img = await uploadImage(productImg);
+      const img = await uploadImage(data.img[0]);
+
+      console.log({ img });
 
       // let product: Product = {
       //   id: "",
