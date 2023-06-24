@@ -41,24 +41,24 @@ export default function FormProduct() {
   }, [isSubmitSuccessful]);
 
   const onSubmit: SubmitHandler<Form> = async (data) => {
-    // try {
-    //   if (!user?.id) return;
-    //   console.log({ data });
-    //   const img = await uploadImage(data.img[0]);
-    //   let product: Product = {
-    //     id: "",
-    //     name: data.name,
-    //     price: data.price,
-    //     img: img.urlImg,
-    //     userId: user?.id,
-    //     userName: user?.fullName ?? "",
-    //     date: new Date(),
-    //   };
-    //   const doc = await saveProduct(product);
-    //   product.id = doc?.id ?? Date.now().toString();
-    // } catch (error) {
-    //   console.error(error);
-    // }
+    try {
+      if (!user?.id) return;
+      console.log({ data });
+      const img = await uploadImage(data.img[0]);
+      let product: Product = {
+        id: "",
+        name: data.name,
+        price: data.price,
+        img: img.urlImg,
+        userId: user?.id,
+        userName: user?.fullName ?? "",
+        date: new Date(),
+      };
+      const doc = await saveProduct(product);
+      product.id = doc?.id ?? Date.now().toString();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   // -----------------------------------
