@@ -29,8 +29,6 @@ export default function FormProduct() {
     formState: { errors, isSubmitting, isSubmitSuccessful },
   } = useForm<Form>({ resolver: zodResolver(schema) });
 
-  console.log({ errors });
-
   useEffect(() => {
     const timeout = setTimeout(() => {
       reset();
@@ -43,7 +41,7 @@ export default function FormProduct() {
   const onSubmit: SubmitHandler<Form> = async (data) => {
     try {
       if (!user?.id) return;
-      console.log({ data });
+
       const img = await uploadImage(data.img[0]);
       let product: Product = {
         id: "",

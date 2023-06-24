@@ -6,7 +6,6 @@ import Link from "next/link";
 
 export default function CartIcon() {
   const cartState = useContext(CartContext);
-  console.log({ cartState });
 
   return (
     <div className="relative">
