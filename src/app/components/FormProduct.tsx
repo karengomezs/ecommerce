@@ -1,5 +1,6 @@
 "use client";
 
+import { toast } from "react-toastify";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -30,12 +31,10 @@ export default function FormProduct() {
   } = useForm<Form>({ resolver: zodResolver(schema) });
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
+    if (isSubmitSuccessful) {
       reset();
-    }, 2000);
-    return () => {
-      clearTimeout(timeout);
-    };
+      toast.success("Product posted!");
+    }
   }, [isSubmitSuccessful]);
 
   const onSubmit: SubmitHandler<Form> = async (data) => {
@@ -141,7 +140,7 @@ export default function FormProduct() {
           </button>
         </Form.Submit>
 
-        {isSubmitSuccessful && <p>Product Posted!</p>}
+        {/* {isSubmitSuccessful && <p>Product Posted!</p>} */}
       </Form.Root>
     </div>
   );
