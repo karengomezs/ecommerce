@@ -18,6 +18,7 @@ const schema = z
 type Form = z.infer<typeof schema>;
 
 export default function FormProduct() {
+  const { user } = useUser();
   const {
     register,
     handleSubmit,
@@ -31,8 +32,6 @@ export default function FormProduct() {
       if (!user?.id) return;
 
       console.log(data);
-
-      // setButtonDisable(true);
 
       // const img = await uploadImage(productImg);
 
@@ -66,19 +65,10 @@ export default function FormProduct() {
 
   // -----------------------------------
 
-  const ref = useRef<HTMLFormElement>(null);
-  const { user } = useUser();
-  const [productName, setProductName] = useState<string>("");
-  const [productPrice, setProductPrice] = useState<number>(0);
-  const [productImg, setProductImg] = useState<File>();
-  const [productPosted, setProductPosted] = useState<boolean>(false);
-  const [buttonDisable, setButtonDisable] = useState<boolean>(false);
-
   return (
     <div className="flex flex-col items-center justify-center h-full w-1/2 py-8 px-14  bg-white text-black font-semibold">
       <h2 className="text-2xl mb-5">Create a product</h2>
       <Form.Root
-        ref={ref}
         className="flex flex-col gap-4"
         onSubmit={handleSubmit(onSubmit)}
       >
@@ -92,10 +82,8 @@ export default function FormProduct() {
                 //   setProductName(e.target.value);
                 //   setProductPosted(false);
                 // }}
-                // value={productName}
+
                 className="w-full p-2 rounded-md border border-slate-300 bg-slate-100"
-                // type="text"
-                // required
               />
             </Form.Control>
           </div>
@@ -114,10 +102,9 @@ export default function FormProduct() {
                 // onChange={(e) => {
                 //   setProductPrice(parseInt(e.target.value));
                 // }}
-                // value={productPrice}
+
                 className="w-full p-2 rounded-md border border-slate-300 bg-slate-100"
                 type="number"
-                // required
               />
             </Form.Control>
           </div>
@@ -134,7 +121,6 @@ export default function FormProduct() {
                 // }}
                 className="w-full p-2 rounded-md border border-slate-300 bg-slate-100"
                 type="file"
-                // required
               />
             </Form.Control>
           </div>
@@ -142,15 +128,15 @@ export default function FormProduct() {
 
         <Form.Submit asChild>
           <button
-            // disabled={buttonDisable}
+            disabled={isSubmitting}
             type="submit"
             className="w-full mx-auto rounded-md bg-emerald-900 hover:bg-emerald-700 text-white font-bold p-2 my-2"
           >
-            {buttonDisable ? <p>Creating product</p> : <p>Post Product</p>}
+            {isSubmitting ? <p>Creating product</p> : <p>Post Product</p>}
           </button>
         </Form.Submit>
 
-        {productPosted && <p>Product Posted!</p>}
+        {isSubmitSuccessful && <p>Product Posted!</p>}
       </Form.Root>
     </div>
   );
