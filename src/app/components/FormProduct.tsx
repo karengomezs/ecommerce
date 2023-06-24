@@ -21,7 +21,7 @@ export default function FormProduct() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting, isSubmitSuccessful },
   } = useForm<Form>({ resolver: zodResolver(schema) });
 
   console.log(errors);
@@ -81,43 +81,6 @@ export default function FormProduct() {
         ref={ref}
         className="flex flex-col gap-4"
         onSubmit={handleSubmit(onSubmit)}
-        // onSubmit={async (e) => {
-        //   e.preventDefault();
-
-        //   try {
-        //     if (!productImg || !user?.id) return;
-
-        //     setButtonDisable(true);
-
-        //     const img = await uploadImage(productImg);
-
-        //     let product: Product = {
-        //       id: "",
-        //       name: productName,
-        //       price: productPrice,
-        //       img: img.urlImg,
-        //       userId: user?.id,
-        //       userName: user?.fullName ?? "",
-        //       date: new Date(),
-        //     };
-
-        //     const doc = await saveProduct(product);
-        //     product.id = doc?.id ?? Date.now().toString();
-
-        //     //     setPostsArray([post, ...postsArray]);
-        //     setProductImg(undefined);
-        //     setProductName("");
-        //     setProductPrice(0);
-        //     //this function clear all form elements
-        //     ref.current?.reset();
-
-        //     setProductPosted(true);
-        //     setButtonDisable(false);
-        //   } catch (error) {
-        //     console.error(error);
-        //     setButtonDisable(false);
-        //   }
-        // }}
       >
         <Form.Field name="name">
           <div className="flex flex-col gap-1">
