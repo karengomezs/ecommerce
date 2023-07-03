@@ -5,7 +5,7 @@ import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 
 import CartContext from "../context/cart-context";
-import { deletePost, deleteProductsCart, saveToCart } from "@/api/cart";
+import { deleteProduct, deleteProductsCart, saveToCart } from "@/api/cart";
 
 export default function Cart() {
   const { user } = useUser();
@@ -50,7 +50,7 @@ export default function Cart() {
               onClick={async () => {
                 try {
                   if (user?.id) {
-                    await deletePost(user.id, product.id);
+                    await deleteProduct(user.id, product.id);
                     //necesito eliminar el elemento que seleccioné del array
 
                     const index = cartState.items.findIndex(

@@ -32,7 +32,7 @@ export async function getproducts(id: string) {
   }
 }
 
-export async function deletePost(userId: string, productId: string) {
+export async function deleteProduct(userId: string, productId: string) {
   try {
     const refs = collection(db, "cart", userId, "productsCollection");
     const q = query(refs, where("id", "==", productId));
